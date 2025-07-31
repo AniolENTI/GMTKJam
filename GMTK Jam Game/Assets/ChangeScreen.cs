@@ -5,13 +5,13 @@ using UnityEngine;
 public class ChangeScreen : MonoBehaviour
 {
     public UnityEngine.Material screenMaterial;
-    public UnityEngine.Texture texture1;
-    public UnityEngine.Texture texture2;
+    public UnityEngine.Texture baseImage;
+    public UnityEngine.Texture[] alteredImageArray;
 
     // Start is called before the first frame update
     void Start()
     {
-        screenMaterial.SetTexture("_MainTex", texture1);
+        screenMaterial.SetTexture("_MainTex", baseImage);
     }
 
     // Update is called once per frame
@@ -19,10 +19,16 @@ public class ChangeScreen : MonoBehaviour
     {
         if(Input.GetKeyUp(KeyCode.Space))
         {
-            if(screenMaterial.GetTexture("_MainTex") == texture1)
-                screenMaterial.SetTexture("_MainTex", texture2);
+            if(screenMaterial.GetTexture("_MainTex") == baseImage)
+            {
+                UnityEngine.Texture auxTexture;
+                int auxLength = alteredImageArray.Length;
+                auxTexture = alteredImageArray[Random.Range(0, auxLength)];
+                screenMaterial.SetTexture("_MainTex", auxTexture);
+            }
+                
             else
-                screenMaterial.SetTexture("_MainTex", texture1);
+                screenMaterial.SetTexture("_MainTex", baseImage);
         }
     }
 }
