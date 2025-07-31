@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen
         Cursor.visible = false; // Hide the cursor
 
-        orientation.transform.rotation = Quaternion.Euler(0f, 0f, 0f); // Initialize orientation rotation
+        orientation.transform.rotation = Quaternion.Euler(90f, 0f, 0f); // Initialize orientation rotation
     }
 
     // Update is called once per frame

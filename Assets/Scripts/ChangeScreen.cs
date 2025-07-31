@@ -8,27 +8,93 @@ public class ChangeScreen : MonoBehaviour
     public UnityEngine.Texture baseImage;
     public UnityEngine.Texture[] alteredImageArray;
 
-    // Start is called before the first frame update
+    bool changed = false;
+
+    [SerializeField] private Camera cam;
+    private Plane[] cameraFrustrum;
+    private Collider collider;
+
+
+    [SerializeField] private float timerMax = 10.0f; 
+    [SerializeField] private float timerMin = 5.0f; 
+    [SerializeField] private float timer = 0.0f;
+
+    [SerializeField] private float loseTimerTotal = 10.0f;
+    [SerializeField] private float loseTimer = 10.0f;
+
     void Start()
     {
+        GameObject aux = GameObject.FindGameObjectWithTag("MainCamera");
+        cam = aux.GetComponent<Camera>();
+        collider = GetComponent<Collider>();
         screenMaterial.SetTexture("_MainTex", baseImage);
+
+        timer = Random.Range(timerMin, timerMax); 
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyUp(KeyCode.Space))
+        if(/*Input.GetKeyUp(KeyCode.Space)*/ timer <= 0 && !changed)
         {
-            if(screenMaterial.GetTexture("_MainTex") == baseImage)
+            int aux = Random.Range(0, 100);
+
+            if(aux < 50) 
             {
-                UnityEngine.Texture auxTexture;
-                int auxLength = alteredImageArray.Length;
-                auxTexture = alteredImageArray[Random.Range(0, auxLength)];
-                screenMaterial.SetTexture("_MainTex", auxTexture);
+                if (screenMaterial.GetTexture("_MainTex") == baseImage)
+                {
+                    UnityEngine.Texture auxTexture;
+                    int auxLength = alteredImageArray.Length;
+                    auxTexture = alteredImageArray[Random.Range(0, auxLength)];
+                    screenMaterial.SetTexture("_MainTex", auxTexture);
+                }
+                else
+                    screenMaterial.SetTexture("_MainTex", baseImage);
+
+                changed = true;
             }
-                
-            else
-                screenMaterial.SetTexture("_MainTex", baseImage);
         }
+
+        if (cam != null)
+        {
+            cameraFrustrum = GeometryUtility.CalculateFrustumPlanes(cam);
+        }
+        else
+        {
+            GameObject aux = GameObject.FindGameObjectWithTag("MainCamera");
+            cam = aux.GetComponent<Camera>();
+        }
+
+        if (!IsInCameraNow())
+        {
+            timer -= Time.deltaTime;
+        }
+        else if (IsInCameraNow())
+        {
+            timer = Random.Range(timerMin, timerMax); 
+        }
+
+        if (changed)
+        {
+            loseTimer -= Time.deltaTime;
+            if (loseTimer <= 0)
+            {                
+                Debug.Log("You lost! Timer ran out.");
+            }
+
+            if(Input.GetKeyUp(KeyCode.Space) && GameManager.Instance.GetTotalEnergy() >= 10.0f)
+            {
+                changed = false;
+                loseTimer = loseTimerTotal;
+                screenMaterial.SetTexture("_MainTex", baseImage);
+                GameManager.Instance.ChangeScreen();
+            }
+        }
+
+    }
+
+    public bool IsInCameraNow()
+    {
+        var bounds = collider.bounds;
+        return GeometryUtility.TestPlanesAABB(cameraFrustrum, bounds);
     }
 }
