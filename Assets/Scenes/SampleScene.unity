@@ -404,10 +404,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenMaterial: {fileID: 2100000, guid: 1ecd2a1d9352c5243ab4a9fa18177416, type: 2}
-  baseImage: {fileID: 2800000, guid: 6e22250fab43367438e19c802cddc791, type: 3}
+  baseImage: {fileID: 2800000, guid: be279d25f4bc02249a7e71a901fe46f1, type: 3}
   alteredImageArray:
-  - {fileID: 2800000, guid: bee4803c021646845b833a5702bbcf8f, type: 3}
-  - {fileID: 2800000, guid: ec3d5492f80669b41babff573762dadf, type: 3}
+  - {fileID: 2800000, guid: c0d227b96068347468f8fe75352a2c85, type: 3}
+  - {fileID: 2800000, guid: 22dc3b3b5d974de41817cfad8daea6ef, type: 3}
+  - {fileID: 2800000, guid: 436507bb4cab59a48957c0c5943b97d3, type: 3}
+  - {fileID: 2800000, guid: 7f4ec2f0669fc0c469193d4da8bd2753, type: 3}
+  - {fileID: 2800000, guid: afea5d5aaf513db4487517e77259dd61, type: 3}
+  - {fileID: 2800000, guid: dff996acc36298245b50695b00ae9639, type: 3}
+  - {fileID: 2800000, guid: bfaa14697fadde64b9da90699f99e592, type: 3}
+  - {fileID: 2800000, guid: b15a14b86eb77a647a58d581a819cc37, type: 3}
+  - {fileID: 2800000, guid: 4854b06de7a5b8840bbf5da4263654c2, type: 3}
   cam: {fileID: 0}
   timerMax: 10
   timerMin: 5

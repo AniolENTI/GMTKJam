@@ -22,6 +22,10 @@ public class ChangeScreen : MonoBehaviour
     [SerializeField] private float loseTimerTotal = 10.0f;
     [SerializeField] private float loseTimer = 10.0f;
 
+    [SerializeField] private float score = 0.0f;
+
+    bool lost = false;
+
     void Start()
     {
         GameObject aux = GameObject.FindGameObjectWithTag("MainCamera");
@@ -34,11 +38,11 @@ public class ChangeScreen : MonoBehaviour
 
     void Update()
     {
-        if(/*Input.GetKeyUp(KeyCode.Space)*/ timer <= 0 && !changed)
+        if (/*Input.GetKeyUp(KeyCode.Space)*/ timer <= 0 && !changed)
         {
             int aux = Random.Range(0, 100);
 
-            if(aux < 50) 
+            if (aux < 50)
             {
                 if (screenMaterial.GetTexture("_MainTex") == baseImage)
                 {
@@ -70,18 +74,19 @@ public class ChangeScreen : MonoBehaviour
         }
         else if (IsInCameraNow())
         {
-            timer = Random.Range(timerMin, timerMax); 
+            timer = Random.Range(timerMin, timerMax);
         }
 
         if (changed)
         {
             loseTimer -= Time.deltaTime;
             if (loseTimer <= 0)
-            {                
+            {
                 Debug.Log("You lost! Timer ran out.");
+                lost = true;
             }
 
-            if(Input.GetKeyUp(KeyCode.Space) && GameManager.Instance.GetTotalEnergy() >= 10.0f && IsInCameraNow())
+            if (Input.GetKeyUp(KeyCode.Space) && GameManager.Instance.GetTotalEnergy() >= 10.0f && IsInCameraNow())
             {
                 changed = false;
                 loseTimer = loseTimerTotal;
@@ -90,8 +95,19 @@ public class ChangeScreen : MonoBehaviour
             }
         }
 
+        if (!lost)
+        {
+            score += Time.deltaTime;
+        }
+        else
+        {
+            if (GameManager.Instance.GetTotalScore() < score)
+            {
+                PlayerPrefs.SetFloat("Score", score);
+                PlayerPrefs.Save();
+            }
+        }
     }
-
     public bool IsInCameraNow()
     {
         var bounds = collider.bounds;

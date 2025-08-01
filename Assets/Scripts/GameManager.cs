@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     [SerializeField] private int totalEnergy = 100;
+
+    private float currentMaxScore = 0.0f;
+
     private void Awake()
     {
         if (Instance != null)
@@ -24,7 +27,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        float currentMaxScore = PlayerPrefs.GetFloat("Score");
+
+
     }
 
     // Update is called once per frame
@@ -46,5 +51,10 @@ public class GameManager : MonoBehaviour
     public void ChangeScreen()
     {
         totalEnergy -= 10; 
+    }
+
+    public float GetTotalScore()
+    {
+        return currentMaxScore;
     }
 }
