@@ -81,7 +81,7 @@ public class ChangeScreen : MonoBehaviour
                 Debug.Log("You lost! Timer ran out.");
             }
 
-            if(Input.GetKeyUp(KeyCode.Space) && GameManager.Instance.GetTotalEnergy() >= 10.0f)
+            if(Input.GetKeyUp(KeyCode.Space) && GameManager.Instance.GetTotalEnergy() >= 10.0f && IsInCameraNow())
             {
                 changed = false;
                 loseTimer = loseTimerTotal;
