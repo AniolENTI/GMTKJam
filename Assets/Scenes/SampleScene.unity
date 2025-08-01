@@ -187,16 +187,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenMaterial: {fileID: 2100000, guid: e656835b2cdeed742bdd1c6e89dec432, type: 2}
-  baseImage: {fileID: 2800000, guid: 3320f75c72ebd05449c90f2a1d155182, type: 3}
+  baseImage: {fileID: 2800000, guid: 876bd43d2a69b8040acae14e41e88e71, type: 3}
   alteredImageArray:
-  - {fileID: 2800000, guid: 1a8c9109fafff1b4fab68d36e1dcc575, type: 3}
-  - {fileID: 2800000, guid: 5b7a68071f4df144b80621ca04fbbfde, type: 3}
+  - {fileID: 2800000, guid: 54a3ca5a1f80499488fb64524b4b972f, type: 3}
+  - {fileID: 2800000, guid: 29417d3da118d8c47b72ce873d23d938, type: 3}
+  - {fileID: 2800000, guid: 29057d00ba874bc41b3a9a345355da28, type: 3}
+  - {fileID: 2800000, guid: 099062f934cab824aa1bd6c7da50723d, type: 3}
+  - {fileID: 2800000, guid: 9cfd97174d74f1f4fac222f04e840a37, type: 3}
+  - {fileID: 2800000, guid: 012fd395bea21e2439307cc2a7701c96, type: 3}
   cam: {fileID: 0}
   timerMax: 60
   timerMin: 5
   timer: 0
   loseTimerTotal: 10
   loseTimer: 10
+  score: 0
 --- !u!64 &59314997
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -421,6 +426,7 @@ MonoBehaviour:
   timer: 0
   loseTimerTotal: 10
   loseTimer: 10
+  score: 0
 --- !u!1 &518028764
 GameObject:
   m_ObjectHideFlags: 0
