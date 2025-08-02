@@ -795,27 +795,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6542578566373776952, guid: 79bc7eab39d98467db7dd8cb3e8b4e7b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.258613
+      value: 10.118
       objectReference: {fileID: 0}
     - target: {fileID: 6542578566373776952, guid: 79bc7eab39d98467db7dd8cb3e8b4e7b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -26.03331
+      value: -23.1234
       objectReference: {fileID: 0}
     - target: {fileID: 6542578566373776952, guid: 79bc7eab39d98467db7dd8cb3e8b4e7b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6542578566373776952, guid: 79bc7eab39d98467db7dd8cb3e8b4e7b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6542578566373776952, guid: 79bc7eab39d98467db7dd8cb3e8b4e7b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6542578566373776952, guid: 79bc7eab39d98467db7dd8cb3e8b4e7b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6542578566373776952, guid: 79bc7eab39d98467db7dd8cb3e8b4e7b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -823,7 +823,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6542578566373776952, guid: 79bc7eab39d98467db7dd8cb3e8b4e7b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 6542578566373776952, guid: 79bc7eab39d98467db7dd8cb3e8b4e7b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -3466,7 +3466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openAngle: 90
   closedAngle: 0
-  doorSpeed: 15
+  doorSpeed: 10
   cam: {fileID: 0}
 --- !u!4 &1843500403
 Transform:

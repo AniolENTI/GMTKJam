@@ -13,10 +13,10 @@ public class SetScore : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        score = PlayerPrefs.GetFloat("Score");
+        score = PlayerPrefs.GetFloat("Time");
 
         
-        scoreText.GetComponent<TextMeshProUGUI>().text = "Score: " + score.ToString("F2");
+        scoreText.GetComponent<TextMeshProUGUI>().text = "Best Time: " + score.ToString("F2");
 
 
     }

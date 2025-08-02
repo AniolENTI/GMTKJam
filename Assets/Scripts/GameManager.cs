@@ -35,14 +35,14 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        float currentMaxScore = PlayerPrefs.GetFloat("Score");
+        float currentMaxScore = PlayerPrefs.GetFloat("Time");
     }
 
     // Update is called once per frame
     void Update()
     {
         energyText.GetComponent<TextMeshProUGUI>().text = "Energy: " + totalEnergy.ToString("F2");
-        scoreText.GetComponent<TextMeshProUGUI>().text = "Score: " + score.ToString("F2");
+        scoreText.GetComponent<TextMeshProUGUI>().text = "Time: " + score.ToString("F2");
 
         if (!gameLost)
         {
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
         {
             if (currentMaxScore < score)
             {
-                PlayerPrefs.SetFloat("Score", score);
+                PlayerPrefs.SetFloat("Time", score);
                 PlayerPrefs.Save();
             }
         }
