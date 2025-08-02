@@ -16,8 +16,10 @@ public class Door : MonoBehaviour
     private float currentAngle;
     public AudioSource audioSource;
     public AudioClip soundEffect;
+
     private bool isWaitingToOpen = false;
     [SerializeField] private float doorWait = 1f; 
+    private float timer = 0f;
 
     void Start()
     {
@@ -40,15 +42,12 @@ public class Door : MonoBehaviour
 
         if (isSeen && isHoldingSpace)
         {
+            timer = 0f;
+            isWaitingToOpen = false;
 
             targetAngle = closedAngle;
             currentAngle = Mathf.MoveTowards(currentAngle, targetAngle, doorSpeed * 1.50f * Time.deltaTime);
-
-            if (isWaitingToOpen)
-            {
-                StopAllCoroutines();
-                isWaitingToOpen = false;
-            }
+            
         }
         else if (!isSeen && !isHoldingSpace)
         {
@@ -58,12 +57,24 @@ public class Door : MonoBehaviour
                 audioSource.PlayOneShot(soundEffect);
             }
 
-            targetAngle = openAngle;
-            currentAngle = Mathf.MoveTowards(currentAngle, targetAngle, doorSpeed * Time.deltaTime);
-            if (Mathf.Approximately(currentAngle, closedAngle) && !isWaitingToOpen)
+            if (Mathf.Approximately(currentAngle, closedAngle))
             {
-                StartCoroutine(WaitBeforeOpening());
+                isWaitingToOpen = true;
+                timer += Time.deltaTime;
+
+                if (timer >= doorWait)
+                {
+                    isWaitingToOpen = false;
+                    timer = 0f;
+                }
             }
+            else
+            {
+                isWaitingToOpen = false;
+                timer = 0f;
+            }
+            targetAngle = openAngle;
+           
             if (!isWaitingToOpen)
             {
                 targetAngle = openAngle;
@@ -80,10 +91,4 @@ public class Door : MonoBehaviour
 
     }
 
-    private IEnumerator WaitBeforeOpening()
-    {
-        isWaitingToOpen = true;
-        yield return new WaitForSeconds(doorWait);
-        isWaitingToOpen = false;
-    }
 }
