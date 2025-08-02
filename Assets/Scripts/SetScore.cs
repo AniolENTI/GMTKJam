@@ -15,9 +15,13 @@ public class SetScore : MonoBehaviour
     {
         score = PlayerPrefs.GetFloat("Time");
 
-        
-        scoreText.GetComponent<TextMeshProUGUI>().text = "Best Time: " + score.ToString("F2");
-
-
+        if(score > 0.0f )
+        {
+            scoreText.GetComponent<TextMeshProUGUI>().text = "Best Time: " + score.ToString("F2");
+        }
+        else
+        {
+            scoreText.GetComponent<TextMeshProUGUI>().text = " ";
+        }
     }
 }
