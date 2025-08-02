@@ -95,18 +95,11 @@ public class ChangeScreen : MonoBehaviour
             }
         }
 
-        if (!lost)
+        if (lost)
         {
-            score += Time.deltaTime;
+            GameManager.Instance.SetGameLost(true);
         }
-        else
-        {
-            if (GameManager.Instance.GetTotalScore() < score)
-            {
-                PlayerPrefs.SetFloat("Score", score);
-                PlayerPrefs.Save();
-            }
-        }
+        
     }
     public bool IsInCameraNow()
     {

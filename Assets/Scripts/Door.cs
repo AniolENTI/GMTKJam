@@ -51,6 +51,7 @@ public class Door : MonoBehaviour
         if (currentAngle == openAngle)
         {
             Debug.Log("Door is open");
+            GameManager.Instance.SetGameLost(true);
         }
 
     }

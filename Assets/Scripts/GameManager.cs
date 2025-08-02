@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +14,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int totalEnergy = 100;
 
     private float currentMaxScore = 0.0f;
+    private float score;
+
+    bool gameLost = false;
+
+    public GameObject energyText;
+    public GameObject scoreText;
 
     private void Awake()
     {
@@ -28,14 +36,26 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         float currentMaxScore = PlayerPrefs.GetFloat("Score");
-
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        energyText.GetComponent<TextMeshProUGUI>().text = "Energy: " + totalEnergy.ToString("F2");
+        scoreText.GetComponent<TextMeshProUGUI>().text = "Score: " + score.ToString("F2");
+
+        if (!gameLost)
+        {
+            score += Time.deltaTime;
+        }
+        else
+        {
+            if (currentMaxScore < score)
+            {
+                PlayerPrefs.SetFloat("Score", score);
+                PlayerPrefs.Save();
+            }
+        }
     }
 
     public int GetTotalEnergy()
@@ -56,5 +76,10 @@ public class GameManager : MonoBehaviour
     public float GetTotalScore()
     {
         return currentMaxScore;
+    }
+
+    public void SetGameLost(bool lost)
+    {
+        gameLost = lost;
     }
 }
