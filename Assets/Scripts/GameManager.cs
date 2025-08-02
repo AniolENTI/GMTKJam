@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject energyText;
     public GameObject scoreText;
+
+    [SerializeField] private float gameOverWait = 5.0f;
 
     private void Awake()
     {
@@ -54,6 +57,7 @@ public class GameManager : MonoBehaviour
             {
                 PlayerPrefs.SetFloat("Time", score);
                 PlayerPrefs.Save();
+                StartCoroutine(WaitBeforeFinishing());
             }
         }
     }
@@ -81,5 +85,11 @@ public class GameManager : MonoBehaviour
     public void SetGameLost(bool lost)
     {
         gameLost = lost;
+    }
+
+    private IEnumerator WaitBeforeFinishing()
+    {
+        yield return new WaitForSeconds(gameOverWait);
+        SceneManager.LoadScene("Menu");
     }
 }

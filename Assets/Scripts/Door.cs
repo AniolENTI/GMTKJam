@@ -16,6 +16,8 @@ public class Door : MonoBehaviour
     private float currentAngle;
     public AudioSource audioSource;
     public AudioClip soundEffect;
+    private bool isWaitingToOpen = false;
+    [SerializeField] private float doorWait = 1f; 
 
     void Start()
     {
@@ -38,9 +40,15 @@ public class Door : MonoBehaviour
 
         if (isSeen && isHoldingSpace)
         {
-            
+
             targetAngle = closedAngle;
             currentAngle = Mathf.MoveTowards(currentAngle, targetAngle, doorSpeed * 1.50f * Time.deltaTime);
+
+            if (isWaitingToOpen)
+            {
+                StopAllCoroutines();
+                isWaitingToOpen = false;
+            }
         }
         else if (!isSeen && !isHoldingSpace)
         {
@@ -52,8 +60,16 @@ public class Door : MonoBehaviour
 
             targetAngle = openAngle;
             currentAngle = Mathf.MoveTowards(currentAngle, targetAngle, doorSpeed * Time.deltaTime);
+            if (Mathf.Approximately(currentAngle, closedAngle) && !isWaitingToOpen)
+            {
+                StartCoroutine(WaitBeforeOpening());
+            }
+            if (!isWaitingToOpen)
+            {
+                targetAngle = openAngle;
+                currentAngle = Mathf.MoveTowards(currentAngle, targetAngle, doorSpeed * Time.deltaTime);
+            }
         }
-        
         transform.localRotation = Quaternion.Euler(0f, currentAngle, 0f);
 
         if (currentAngle == openAngle)
@@ -62,5 +78,12 @@ public class Door : MonoBehaviour
             GameManager.Instance.SetGameLost(true);
         }
 
+    }
+
+    private IEnumerator WaitBeforeOpening()
+    {
+        isWaitingToOpen = true;
+        yield return new WaitForSeconds(doorWait);
+        isWaitingToOpen = false;
     }
 }
