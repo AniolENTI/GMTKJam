@@ -14,6 +14,8 @@ public class Door : MonoBehaviour
     private Plane[] cameraFrustum;
 
     private float currentAngle;
+    public AudioSource audioSource;
+    public AudioClip soundEffect;
 
     void Start()
     {
@@ -40,8 +42,14 @@ public class Door : MonoBehaviour
             targetAngle = closedAngle;
             currentAngle = Mathf.MoveTowards(currentAngle, targetAngle, doorSpeed * 1.50f * Time.deltaTime);
         }
-        else
+        else if (!isSeen && !isHoldingSpace)
         {
+            if (Mathf.Round(currentAngle) == 40.0f)
+            {
+                Debug.Log("Sound effect");
+                audioSource.PlayOneShot(soundEffect);
+            }
+
             targetAngle = openAngle;
             currentAngle = Mathf.MoveTowards(currentAngle, targetAngle, doorSpeed * Time.deltaTime);
         }
