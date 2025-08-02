@@ -91,7 +91,28 @@ public class ChangeScreen : MonoBehaviour
                 changed = false;
                 loseTimer = loseTimerTotal;
                 screenMaterial.SetTexture("_MainTex", baseImage);
-                GameManager.Instance.ChangeScreen();
+                GameManager.Instance.LosePower();
+
+                if(GameManager.Instance.GetTotalEnergy() <= 0.0f)
+                {
+                    lost = true;
+                }
+            }
+        }
+        else
+        {
+            if (Input.GetKeyUp(KeyCode.Space) && GameManager.Instance.GetTotalEnergy() >= 10.0f && IsInCameraNow())
+            {
+                changed = false;
+                loseTimer = loseTimerTotal;
+                screenMaterial.SetTexture("_MainTex", baseImage);
+                GameManager.Instance.LosePower();
+                GameManager.Instance.LosePower();
+
+                if (GameManager.Instance.GetTotalEnergy() <= 0.0f)
+                {
+                    lost = true;
+                }
             }
         }
 

@@ -38,14 +38,14 @@ public class Door : MonoBehaviour
         {
             
             targetAngle = closedAngle;
+            currentAngle = Mathf.MoveTowards(currentAngle, targetAngle, doorSpeed * 1.50f * Time.deltaTime);
         }
         else
         {
             targetAngle = openAngle;
+            currentAngle = Mathf.MoveTowards(currentAngle, targetAngle, doorSpeed * Time.deltaTime);
         }
-
         
-        currentAngle = Mathf.MoveTowards(currentAngle, targetAngle, doorSpeed * Time.deltaTime);
         transform.localRotation = Quaternion.Euler(0f, currentAngle, 0f);
 
         if (currentAngle == openAngle)

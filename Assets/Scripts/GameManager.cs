@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
         totalEnergy = energy;
     }
 
-    public void ChangeScreen()
+    public void LosePower()
     {
         totalEnergy -= 10; 
     }
